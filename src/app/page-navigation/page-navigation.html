@@ -1,0 +1,12 @@
+<nav>
+  <a routerLink="/"><h1>Yggdrasil</h1></a>
+
+  <div class="links-container">
+    @if (isSignedIn()) {
+      <button matButton="tonal" routerLink="backoffice">Backoffice</button>
+      <button matButton="tonal" (click)="signOut()">Sign out</button>
+    } @else {
+      <button matButton="tonal" (click)="signIn()">Sign in</button>
+    }
+  </div>
+</nav>

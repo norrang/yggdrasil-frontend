@@ -1,0 +1,21 @@
+<main class="page-container">
+  <h2>Welcome to Rövhalt Logging Co., Ltd.'s Yggdrasil</h2>
+
+  <div class="home-actions">
+    <div class="action-container">
+      <button matButton="filled" routerLink="/register">Place new order</button>
+    </div>
+
+    <mat-divider class="horizontal-divider"></mat-divider>
+    <mat-divider [vertical]="true" class="vertical-divider"></mat-divider>
+
+    <form class="action-container">
+      <mat-form-field>
+        <mat-label>Order id</mat-label>
+        <input matInput />
+        <mat-hint>Use this format: XXXX-XXXX</mat-hint>
+      </mat-form-field>
+      <button matButton="filled" type="submit">Lookup order</button>
+    </form>
+  </div>
+</main>

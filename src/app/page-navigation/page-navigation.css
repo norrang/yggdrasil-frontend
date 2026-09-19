@@ -1,0 +1,27 @@
+nav {
+  height: 6rem;
+  padding: 1rem;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-image: url('/header.webp');
+  background-size: cover;
+
+  a {
+    margin-left: 4rem;
+    text-decoration: none;
+    color: var(--mat-sys-on-tertiary);
+  }
+
+  h1 {
+    line-height: 0;
+    font-size: 2.25rem;
+  }
+}
+
+.links-container {
+  margin-right: 4rem;
+  display: flex;
+  gap: calc(var(--base-spacing) * 4);
+}
