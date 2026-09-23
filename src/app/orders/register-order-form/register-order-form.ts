@@ -11,6 +11,7 @@ import { PublicItemTypeStore } from '../../item-types/public-item-type-store';
 import { NgOptimizedImage } from '@angular/common';
 import {
   applyEach,
+  email,
   form,
   FormField,
   FormRoot,
@@ -28,6 +29,7 @@ import { firstValueFrom } from 'rxjs';
 import { PublicApiClient } from '../../public-api-client';
 import { RegisterOrderStateStore } from '../register-order-state-store';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { PreviousOrderNumbersStore } from '../previous-order-numbers-store';
 
 interface OrderModel {
   customerName: string;
@@ -69,6 +71,7 @@ export class RegisterOrderForm {
   protected readonly itemTypesResource = inject(PublicItemTypeStore).itemTypesResource;
   protected readonly publicApiClient = inject(PublicApiClient);
   protected readonly registerOrderStateStore = inject(RegisterOrderStateStore);
+  protected readonly previousOrderNumbersStore = inject(PreviousOrderNumbersStore);
   protected readonly matSnackBar = inject(MatSnackBar);
 
   protected orderModel = linkedSignal<PublicItemTypeResponse[] | undefined, OrderModel>({
@@ -89,6 +92,7 @@ export class RegisterOrderForm {
       required(schemaPath.customerName, { message: 'Customer name is required' });
       required(schemaPath.characterName, { message: 'Character name is required' });
       required(schemaPath.dropOffLocation, { message: 'Drop off location is required' });
+      email(schemaPath.customerEmail, { message: 'A valid email address is required' });
 
       validate(schemaPath.lines, ({ value }) => {
         if (!value().find((lineItem) => lineItem.quantity && lineItem.quantity > 0)) {
@@ -108,9 +112,11 @@ export class RegisterOrderForm {
       submission: {
         action: async (field) => {
           try {
-            this.registerOrderStateStore.lastOrderResult = await firstValueFrom(
+            const orderResponse = await firstValueFrom(
               this.publicApiClient.placeOrder(this.orderModelToCreateOrderRequest(field().value())),
             );
+            this.registerOrderStateStore.lastOrderResult = orderResponse;
+            this.previousOrderNumbersStore.storeOrderNumber(orderResponse.orderNumber);
             this.moveToResultView.emit();
             return;
           } catch (error) {

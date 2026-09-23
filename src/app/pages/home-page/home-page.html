@@ -9,13 +9,33 @@
     <mat-divider class="horizontal-divider"></mat-divider>
     <mat-divider [vertical]="true" class="vertical-divider"></mat-divider>
 
-    <form class="action-container">
-      <mat-form-field>
-        <mat-label>Order id</mat-label>
-        <input matInput />
-        <mat-hint>Use this format: XXXX-XXXX</mat-hint>
-      </mat-form-field>
-      <button matButton="filled" type="submit">Lookup order</button>
-    </form>
+    <div class="order-lookup">
+      <form class="action-container" [formRoot]="lookupForm">
+        <mat-form-field>
+          <mat-label>Order number</mat-label>
+          <input matInput [formField]="lookupForm.orderNumber" />
+          <mat-error>{{ lookupForm.orderNumber().errors()[0]?.message }}</mat-error>
+          <mat-hint>Order numbers follow this format: XXXX-XXXX</mat-hint>
+        </mat-form-field>
+        <button
+          matButton="filled"
+          type="submit"
+          [disabled]="!lookupForm().valid() || lookupForm().submitting()"
+        >
+          Lookup order
+        </button>
+      </form>
+
+      @if (shownPreviousOrderNumbers(); as orderNumbers) {
+        <div class="previous-order-numbers-container">
+          <h3>Previous order numbers</h3>
+          <mat-nav-list>
+            @for (orderNumber of orderNumbers; track orderNumber) {
+              <a mat-list-item [routerLink]="'/order-lookup/' + orderNumber">{{ orderNumber }}</a>
+            }
+          </mat-nav-list>
+        </div>
+      }
+    </div>
   </div>
 </main>

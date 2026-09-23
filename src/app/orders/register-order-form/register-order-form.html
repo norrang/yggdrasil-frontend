@@ -11,7 +11,7 @@
     <mat-label>Email</mat-label>
     <input matInput [formField]="orderForm.customerEmail" />
     <mat-hint>Email is used to send order notifications</mat-hint>
-    <mat-error>{{ orderForm.customerName().errors()[0]?.message }}</mat-error>
+    <mat-error>{{ orderForm.customerEmail().errors()[0]?.message }}</mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width">

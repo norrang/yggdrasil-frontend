@@ -15,7 +15,7 @@ export class PublicApiClient {
   }
 
   public getOrderByOrderNumber(orderNumber: string) {
-    return httpResource<PublicOrderResponse>(() => `${this.BASE_API_URL}/orders/${orderNumber}`);
+    return this.http.get<PublicOrderResponse>(`${this.BASE_API_URL}/orders/${orderNumber}`);
   }
 
   public placeOrder(createOrderRequest: CreateOrderRequest) {
