@@ -1,0 +1,20 @@
+@let orderDetails = lastOrderResult();
+
+@if (orderDetails) {
+  @let orderNumber = orderDetails.orderNumber;
+  <h2>Order created successfully!</h2>
+
+  <p>Your order number is:</p>
+  <div class="order-number-container">
+    <span class="order-number">{{ orderNumber }}</span>
+    <button matIconButton (click)="copyOrderNumber(orderNumber)">
+      <mat-icon>content_copy</mat-icon>
+    </button>
+  </div>
+
+  @if (orderDetails.customerEmail) {
+    <p>The order number and other order information has been sent to your email.</p>
+  } @else {
+    <p>Please make sure to save this order id for future reference!</p>
+  }
+}

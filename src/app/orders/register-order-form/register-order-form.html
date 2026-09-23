@@ -1,29 +1,78 @@
 <h2>Place a new order</h2>
 
-<form>
-  <div class="customer-names">
-    <mat-form-field>
-      <mat-label>Name</mat-label>
-      <input matInput />
-    </mat-form-field>
+<form [formRoot]="orderForm">
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput [formField]="orderForm.customerName" />
+    <mat-error>{{ orderForm.customerName().errors()[0]?.message }}</mat-error>
+  </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Character name</mat-label>
-      <input matInput />
-    </mat-form-field>
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input matInput [formField]="orderForm.customerEmail" />
+    <mat-hint>Email is used to send order notifications</mat-hint>
+    <mat-error>{{ orderForm.customerName().errors()[0]?.message }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>Character name</mat-label>
+    <input matInput [formField]="orderForm.characterName" />
+    <mat-error>{{ orderForm.characterName().errors()[0]?.message }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>Drop-off location</mat-label>
+    <input matInput [formField]="orderForm.dropOffLocation" />
+    <mat-error>{{ orderForm.dropOffLocation().errors()[0]?.message }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>Optional notes</mat-label>
+    <textarea matInput [formField]="orderForm.customerNote" rows="5"></textarea>
+  </mat-form-field>
+
+  <div class="items-container full-width">
+    <h3>Items</h3>
+
+    @if (itemTypesResource.isLoading()) {
+      <div class="spinner-container">
+        <mat-spinner diameter="64" />
+      </div>
+    } @else {
+      <div class="item-list">
+        @for (item of orderForm.lines; track $index) {
+          @let itemData = item().value();
+          <mat-card appearance="outlined">
+            <mat-card-content>
+              <div class="item-information-container">
+                <div class="image-container">
+                  <img [ngSrc]="itemData.imageUrl" fill priority alt="" />
+                </div>
+                <span class="name">{{ itemData.name }}</span>
+              </div>
+              <mat-form-field class="quantity-form-field" appearance="outline">
+                <mat-label>Quantity</mat-label>
+                <input matInput type="number" [formField]="item.quantity" class="quantity-input" />
+                <span matTextSuffix>&nbsp;{{ itemData.quantityType }}</span>
+                <mat-error>{{ item().errors()[0]?.message }}</mat-error>
+              </mat-form-field></mat-card-content
+            >
+          </mat-card>
+        }
+      </div>
+    }
   </div>
 
-  <mat-form-field>
-    <mat-label>Drop-off location</mat-label>
-    <input matInput />
-  </mat-form-field>
-
-  <table>
-    THE TABLE GOES HERE
-  </table>
-
-  <mat-form-field>
-    <mat-label>Notes</mat-label>
-    <textarea matInput></textarea>
-  </mat-form-field>
+  <div class="form-actions full-width">
+    <button matButton type="button" routerLink="/">Cancel</button>
+    <button
+      matButton="filled"
+      type="submit"
+      [showProgress]="orderForm().submitting()"
+      [disabled]="!orderForm().valid() || orderForm().submitting()"
+    >
+      Place order
+      <mat-progress-spinner progressIndicator mode="indeterminate" diameter="20" />
+    </button>
+  </div>
 </form>

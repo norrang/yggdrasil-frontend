@@ -3,6 +3,16 @@
   --base-spacing: 0.25rem;
 }
 
+h2 {
+  font-size: 1.7rem;
+  line-height: calc(1.75 / 1.25);
+}
+
+h3 {
+  font-size: 1.4rem;
+  line-height: calc(2 / 1.5);
+}
+
 .page-container {
   margin: calc(var(--base-spacing) * 12) calc(var(--base-spacing) * 16);
   display: flex;

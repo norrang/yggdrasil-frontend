@@ -1,3 +1,10 @@
 <main class="page-container">
-  <app-register-order-form />
+  @switch (registerOrderViewState()) {
+    @case (RegisterOrderView.FORM) {
+      <app-register-order-form (moveToResultView)="moveToResult()" />
+    }
+    @case (RegisterOrderView.RESULT) {
+      <app-register-order-result />
+    }
+  }
 </main>
