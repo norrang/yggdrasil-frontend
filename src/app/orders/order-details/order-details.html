@@ -1,0 +1,97 @@
+@let order = orderDetails();
+
+<div class="order-header">
+  <h2>Order {{ order.orderNumber }}</h2>
+  <div class="action-container">
+    <button matIconButton matTooltip="Refresh order details" (click)="refreshOrderDetails.emit()">
+      <mat-icon>refresh</mat-icon>
+    </button>
+    <mat-chip> {{ order.status }}</mat-chip>
+  </div>
+</div>
+
+<div class="order-details-container">
+  <div class="section-container">
+    <section>
+      <h3>Customer information</h3>
+      <dl>
+        <dt>Name</dt>
+        <dd>
+          {{ order.customerName }}
+        </dd>
+
+        @if (order.customerEmail) {
+          <dt>Email</dt>
+          <dd>
+            {{ order.customerEmail }}
+          </dd>
+        }
+
+        <dt>Character name</dt>
+        <dd>
+          {{ order.characterName }}
+        </dd>
+      </dl>
+    </section>
+
+    <section>
+      <h3>Order specifics</h3>
+      <dl>
+        <dt>Order placed</dt>
+        <dd>{{ order.orderedAt | date: 'dd.MM.yyyy HH.mm.ss' }}</dd>
+        <dt>Drop-off location</dt>
+        <dd>{{ order.dropOffLocation }}</dd>
+        @if (order.customerNote) {
+          <dt>Customer note</dt>
+          <dd>{{ order.customerNote }}</dd>
+        }
+      </dl>
+    </section>
+  </div>
+
+  <table mat-table [dataSource]="orderLines">
+    <ng-container matColumnDef="image">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <div class="image-container">
+          <img [ngSrc]="element.imageUrl" fill priority alt="" />
+        </div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Item</th>
+      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="quantity">
+      <th mat-header-cell *matHeaderCellDef>Quantity</th>
+      <td mat-cell *matCellDef="let element">{{ element.quantity }} {{ element.quantityType }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+    <tr *matNoDataRow>
+      <td colspan="3">This order contains to items</td>
+    </tr>
+  </table>
+
+  <div>
+    <h3>Comments</h3>
+    <div class="comment-container">
+      @for (comment of order.comments; track comment.id) {
+        <mat-card>
+          <mat-card-header>
+            {{ comment.createdAt | date: 'dd.MM.yyyy HH.mm.ss' }}
+          </mat-card-header>
+          <mat-card-content>
+            <p>{{ comment.body }}</p>
+          </mat-card-content>
+        </mat-card>
+      } @empty {
+        <p>There are no comments to show</p>
+      }
+    </div>
+  </div>
+</div>

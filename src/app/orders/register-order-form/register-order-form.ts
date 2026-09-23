@@ -8,7 +8,7 @@ import {
   MatSuffix,
 } from '@angular/material/input';
 import { PublicItemTypeStore } from '../../item-types/public-item-type-store';
-import { NgOptimizedImage } from '@angular/common';
+import { JsonPipe, NgOptimizedImage } from '@angular/common';
 import {
   applyEach,
   email,
@@ -60,6 +60,7 @@ interface OrderModelLine extends PublicItemTypeResponse {
     RouterLink,
     FormRoot,
     MatHint,
+    JsonPipe,
   ],
   selector: 'app-register-order-form',
   styleUrl: './register-order-form.css',
@@ -105,7 +106,7 @@ export class RegisterOrderForm {
         return null;
       });
       applyEach(schemaPath.lines, (lineItem) => {
-        min(lineItem.quantity, 0, { message: 'Quantity needs to be a positive number' });
+        min(lineItem.quantity, 1, { message: 'Quantity needs to be a positive number' });
       });
     },
     {

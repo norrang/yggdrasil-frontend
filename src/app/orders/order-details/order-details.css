@@ -1,0 +1,70 @@
+dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.25rem 1rem;
+  margin: 0;
+}
+
+dl > div {
+  display: contents; /* children participate in the parent grid */
+}
+
+dt {
+  font-weight: 600;
+}
+
+dd {
+  margin: 0;
+}
+
+.order-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  .action-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: calc(var(--base-spacing) * 4);
+  }
+}
+
+.section-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: calc(var(--base-spacing) * 16);
+}
+
+.mat-column-image {
+  width: 64px;
+}
+
+.image-container {
+  position: relative;
+  width: 64px;
+  height: 64px;
+
+  img {
+    object-fit: contain;
+  }
+}
+
+.order-details-container {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--base-spacing) * 16);
+}
+
+mat-card-content {
+  p {
+    font: var(--mat-sys-body-large);
+  }
+}
+
+.comment-container {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--base-spacing) * 4);
+}

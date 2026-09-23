@@ -10,7 +10,7 @@
   <mat-form-field>
     <mat-label>Email</mat-label>
     <input matInput [formField]="orderForm.customerEmail" />
-    <mat-hint>Email is used to send order notifications</mat-hint>
+    <mat-hint>Email is only used to send order notifications</mat-hint>
     <mat-error>{{ orderForm.customerEmail().errors()[0]?.message }}</mat-error>
   </mat-form-field>
 
@@ -54,7 +54,7 @@
                 <mat-label>Quantity</mat-label>
                 <input matInput type="number" [formField]="item.quantity" class="quantity-input" />
                 <span matTextSuffix>&nbsp;{{ itemData.quantityType }}</span>
-                <mat-error>{{ item().errors()[0]?.message }}</mat-error>
+                <mat-error>{{ item.quantity().errors()[0]?.message }}</mat-error>
               </mat-form-field></mat-card-content
             >
           </mat-card>

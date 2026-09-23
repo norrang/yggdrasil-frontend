@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { LoginResponse, OidcSecurityService } from 'angular-auth-oidc-client';
+import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { finalize } from 'rxjs';
 import { AccountStore } from './auth/account-store';
 import { PageNavigation } from './page-navigation/page-navigation';
@@ -22,8 +22,6 @@ export class App {
     this.oidcSecurityService
       .checkAuth()
       .pipe(finalize(() => (this.accountStore.hasCheckedAuth = true)))
-      .subscribe((loginResponse: LoginResponse) => {
-        console.log(loginResponse.userData);
-      });
+      .subscribe();
   }
 }

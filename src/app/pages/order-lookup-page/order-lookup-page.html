@@ -1,3 +1,7 @@
-<p>Order number {{ orderNumber() }}</p>
-
-<p>Order details {{ orderDetails() | json }}</p>
+<main class="page-container">
+  @if (orderDetails(); as orderDetails) {
+    <app-order-details [orderDetails]="orderDetails" />
+  } @else {
+    <p>Order details not found</p>
+  }
+</main>
