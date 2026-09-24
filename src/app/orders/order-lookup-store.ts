@@ -6,17 +6,23 @@ import { firstValueFrom, tap } from 'rxjs';
 @Service()
 export class OrderLookupStore {
   private readonly publicApiClient = inject(PublicApiClient);
-  private _orderDetails = signal<PublicOrderResponse | null>(null);
+  private _loadingOrderDetails = signal(false);
+  private _storedOrderDetails = signal<PublicOrderResponse | null>(null);
 
-  get orderDetails() {
-    return this._orderDetails.asReadonly();
+  get loadingOrderDetails() {
+    return this._loadingOrderDetails.asReadonly();
+  }
+
+  get storedOrderDetails() {
+    return this._storedOrderDetails.asReadonly();
   }
 
   async lookupOrder(orderNumber: string) {
+    this._loadingOrderDetails.set(true);
     return firstValueFrom(
       this.publicApiClient
         .getOrderByOrderNumber(orderNumber)
-        .pipe(tap((orderDetails) => this._orderDetails.set(orderDetails))),
-    );
+        .pipe(tap((orderDetails) => this._storedOrderDetails.set(orderDetails))),
+    ).finally(() => this._loadingOrderDetails.set(false));
   }
 }

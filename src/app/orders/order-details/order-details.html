@@ -3,7 +3,12 @@
 <div class="order-header">
   <h2>Order {{ order.orderNumber }}</h2>
   <div class="action-container">
-    <button matIconButton matTooltip="Refresh order details" (click)="refreshOrderDetails.emit()">
+    <button
+      matIconButton
+      matTooltip="Refresh order details"
+      (click)="refreshOrderDetails.emit()"
+      [disabled]="loadingOrderDetails()"
+    >
       <mat-icon>refresh</mat-icon>
     </button>
     <mat-chip> {{ order.status }}</mat-chip>

@@ -1,7 +1,22 @@
 <main class="page-container">
   @if (orderDetails(); as orderDetails) {
-    <app-order-details [orderDetails]="orderDetails" />
+    <app-order-details
+      [orderDetails]="orderDetails"
+      [loadingOrderDetails]="loadingOrderDetails()"
+      (refreshOrderDetails)="refreshOrderDetails()"
+    />
   } @else {
-    <p>Order details not found</p>
+    @if (loadingOrderDetails()) {
+      <p>Loading...</p>
+    }
+    @if (orderDetailsError(); as errorDetails) {
+      @if (errorDetails.status === HttpStatusCode.NotFound) {
+        <p>Order details not found for order with order number {{ orderNumber() }}</p>
+      } @else {
+        <p>An error occurred while loading order details!</p>
+
+        <pre>{{ errorDetails | json }}</pre>
+      }
+    }
   }
 </main>

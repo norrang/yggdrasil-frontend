@@ -8,7 +8,7 @@ import {
   MatSuffix,
 } from '@angular/material/input';
 import { PublicItemTypeStore } from '../../item-types/public-item-type-store';
-import { JsonPipe, NgOptimizedImage } from '@angular/common';
+import { NgOptimizedImage } from '@angular/common';
 import {
   applyEach,
   email,
@@ -60,7 +60,6 @@ interface OrderModelLine extends PublicItemTypeResponse {
     RouterLink,
     FormRoot,
     MatHint,
-    JsonPipe,
   ],
   selector: 'app-register-order-form',
   styleUrl: './register-order-form.css',

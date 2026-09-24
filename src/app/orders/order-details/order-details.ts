@@ -1,6 +1,6 @@
 import { Component, computed, input, output } from '@angular/core';
 import { PublicOrderResponse } from '../public-order-response';
-import { DatePipe, JsonPipe, NgOptimizedImage } from '@angular/common';
+import { DatePipe, NgOptimizedImage } from '@angular/common';
 import { MatChip } from '@angular/material/chips';
 import { MatIcon } from '@angular/material/icon';
 import { MatIconButton } from '@angular/material/button';
@@ -23,7 +23,6 @@ import { MatCard, MatCardContent, MatCardHeader } from '@angular/material/card';
 
 @Component({
   imports: [
-    JsonPipe,
     MatChip,
     DatePipe,
     MatIcon,
@@ -51,6 +50,7 @@ import { MatCard, MatCardContent, MatCardHeader } from '@angular/material/card';
 })
 export class OrderDetails {
   orderDetails = input.required<PublicOrderResponse>();
+  loadingOrderDetails = input<boolean>(false);
   refreshOrderDetails = output<void>();
 
   orderLines = toObservable(computed(() => this.orderDetails().lines));
