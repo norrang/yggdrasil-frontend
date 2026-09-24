@@ -15,6 +15,7 @@ import {
   form,
   FormField,
   FormRoot,
+  max,
   maxLength,
   min,
   required,
@@ -122,6 +123,9 @@ export class RegisterOrderForm {
       });
       applyEach(schemaPath.lines, (lineItem) => {
         min(lineItem.quantity, 1, { message: 'Quantity needs to be a positive number' });
+        max(lineItem.quantity, 2147483647, {
+          message: 'Quantity needs to be less than 2147483647',
+        });
       });
     },
     {
