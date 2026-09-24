@@ -51,6 +51,7 @@ import { MatCard, MatCardContent, MatCardHeader } from '@angular/material/card';
 export class OrderDetails {
   orderDetails = input.required<PublicOrderResponse>();
   loadingOrderDetails = input<boolean>(false);
+  orderSummary = input<boolean>(false);
   refreshOrderDetails = output<void>();
 
   orderLines = toObservable(computed(() => this.orderDetails().lines));

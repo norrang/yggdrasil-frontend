@@ -1,0 +1,6 @@
+.spinner-container {
+  padding: calc(var(--base-spacing) * 8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -7,7 +7,9 @@
     />
   } @else {
     @if (loadingOrderDetails()) {
-      <p>Loading...</p>
+      <div class="spinner-container">
+        <mat-spinner diameter="48" />
+      </div>
     }
     @if (orderDetailsError(); as errorDetails) {
       @if (errorDetails.status === HttpStatusCode.NotFound) {

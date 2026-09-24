@@ -1,19 +1,21 @@
 @let order = orderDetails();
 
-<div class="order-header">
-  <h2>Order {{ order.orderNumber }}</h2>
-  <div class="action-container">
-    <button
-      matIconButton
-      matTooltip="Refresh order details"
-      (click)="refreshOrderDetails.emit()"
-      [disabled]="loadingOrderDetails()"
-    >
-      <mat-icon>refresh</mat-icon>
-    </button>
-    <mat-chip> {{ order.status }}</mat-chip>
+@if (!orderSummary()) {
+  <div class="order-header">
+    <h2>Order {{ order.orderNumber }}</h2>
+    <div class="action-container">
+      <button
+        matIconButton
+        matTooltip="Refresh order details"
+        (click)="refreshOrderDetails.emit()"
+        [disabled]="loadingOrderDetails()"
+      >
+        <mat-icon>refresh</mat-icon>
+      </button>
+      <mat-chip> {{ order.status }}</mat-chip>
+    </div>
   </div>
-</div>
+}
 
 <div class="order-details-container">
   <div class="section-container">
@@ -82,21 +84,23 @@
     </tr>
   </table>
 
-  <div>
-    <h3>Comments</h3>
-    <div class="comment-container">
-      @for (comment of order.comments; track comment.id) {
-        <mat-card>
-          <mat-card-header>
-            {{ comment.createdAt | date: 'dd.MM.yyyy HH.mm.ss' }}
-          </mat-card-header>
-          <mat-card-content>
-            <p>{{ comment.body }}</p>
-          </mat-card-content>
-        </mat-card>
-      } @empty {
-        <p>There are no comments to show</p>
-      }
+  @if (!orderSummary()) {
+    <div>
+      <h3>Comments</h3>
+      <div class="comment-container">
+        @for (comment of order.comments; track comment.id) {
+          <mat-card>
+            <mat-card-header>
+              {{ comment.createdAt | date: 'dd.MM.yyyy HH.mm.ss' }}
+            </mat-card-header>
+            <mat-card-content>
+              <p>{{ comment.body }}</p>
+            </mat-card-content>
+          </mat-card>
+        } @empty {
+          <p>There are no comments to show</p>
+        }
+      </div>
     </div>
-  </div>
+  }
 </div>

@@ -1,6 +1,6 @@
 dl {
   display: grid;
-  grid-template-columns: max-content 1fr;
+  grid-template-columns: max-content minmax(0, 1fr);
   gap: 0.25rem 1rem;
   margin: 0;
 }
@@ -15,6 +15,9 @@ dt {
 
 dd {
   margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
 }
 
 .order-header {
@@ -60,6 +63,7 @@ dd {
 mat-card-content {
   p {
     font: var(--mat-sys-body-large);
+    overflow-wrap: anywhere;
   }
 }
 

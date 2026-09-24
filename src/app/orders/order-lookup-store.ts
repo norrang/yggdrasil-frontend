@@ -17,8 +17,13 @@ export class OrderLookupStore {
     return this._storedOrderDetails.asReadonly();
   }
 
-  async lookupOrder(orderNumber: string) {
+  async lookupOrder(orderNumber: string, clearWhileLoading = false) {
     this._loadingOrderDetails.set(true);
+
+    if (clearWhileLoading) {
+      this._storedOrderDetails.set(null);
+    }
+
     return firstValueFrom(
       this.publicApiClient
         .getOrderByOrderNumber(orderNumber)

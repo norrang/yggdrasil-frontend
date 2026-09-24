@@ -15,6 +15,7 @@ import {
   form,
   FormField,
   FormRoot,
+  maxLength,
   min,
   required,
   validate,
@@ -90,9 +91,24 @@ export class RegisterOrderForm {
     this.orderModel,
     (schemaPath) => {
       required(schemaPath.customerName, { message: 'Customer name is required' });
+      maxLength(schemaPath.customerName, 100, {
+        message: 'Customer name must be less than 100 characters',
+      });
       required(schemaPath.characterName, { message: 'Character name is required' });
+      maxLength(schemaPath.characterName, 100, {
+        message: 'Character name must be less than 100 characters',
+      });
       required(schemaPath.dropOffLocation, { message: 'Drop off location is required' });
+      maxLength(schemaPath.dropOffLocation, 200, {
+        message: 'Drop off location must be less than 200 characters',
+      });
       email(schemaPath.customerEmail, { message: 'A valid email address is required' });
+      maxLength(schemaPath.customerEmail, 254, {
+        message: 'Customer email must be less than 254 characters',
+      });
+      maxLength(schemaPath.customerNote, 1000, {
+        message: 'Customer note must be less than 1000 characters',
+      });
 
       validate(schemaPath.lines, ({ value }) => {
         if (!value().find((lineItem) => lineItem.quantity && lineItem.quantity > 0)) {

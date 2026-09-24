@@ -4,9 +4,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { OrderDetails } from '../../orders/order-details/order-details';
 import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { JsonPipe } from '@angular/common';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @Component({
-  imports: [OrderDetails, JsonPipe],
+  imports: [OrderDetails, JsonPipe, MatProgressSpinner],
   selector: 'app-order-lookup-page',
   styleUrl: './order-lookup-page.css',
   templateUrl: './order-lookup-page.html',
@@ -25,12 +26,10 @@ export class OrderLookupPage implements OnInit {
 
   ngOnInit() {
     const orderNumber = this.orderNumber();
+    const isNewOrderNumber = this.orderDetails()?.orderNumber !== orderNumber;
     // If the page is opened through, for example, a link, we want to lookup the order details
-    if (
-      orderNumber &&
-      (this.orderDetails() === null || this.orderDetails()?.orderNumber !== orderNumber)
-    ) {
-      this.orderLookupStore.lookupOrder(orderNumber).catch((error) => {
+    if (orderNumber && (this.orderDetails() === null || isNewOrderNumber)) {
+      this.orderLookupStore.lookupOrder(orderNumber, isNewOrderNumber).catch((error) => {
         this.handleOrderLookupError(error);
       });
     }
