@@ -6,7 +6,7 @@ export const authConfig: PassedInitialConfig = {
     authority: environment.issuerUri,
     redirectUrl: window.location.origin,
     postLogoutRedirectUri: window.location.origin,
-    clientId: 'bz1cV761LVMY8cYE8JiZxqJjmLSiCAYR5cOPHeOC',
+    clientId: environment.clientId,
     scope: 'openid profile offline_access entitlements valheim_character_name', // 'openid profile offline_access ' + your scopes
     responseType: 'code',
     silentRenew: true,
