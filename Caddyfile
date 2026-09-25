@@ -1,0 +1,30 @@
+{
+	auto_https off
+	servers {
+		trusted_proxies static private_ranges
+	}
+}
+
+http://:8080 {
+	encode zstd gzip
+
+	header {
+		X-Content-Type-Options nosniff
+		-Server
+	}
+
+	handle /health {
+		respond "ok" 200
+	}
+
+	handle {
+		root * /srv
+		@hashed path *.js *.css
+		route {
+			header @hashed Cache-Control "public, max-age=31536000, immutable"
+			try_files {path} /index.html
+			header /index.html Cache-Control "public, max-age=0, must-revalidate"
+			file_server
+		}
+	}
+}

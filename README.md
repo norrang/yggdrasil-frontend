@@ -54,6 +54,37 @@ ng e2e
 
 Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
 
+## Deployment
+
+The production image is a multi-stage build: Angular compiles in Node, and [Caddy](https://caddyserver.com/) serves the static files over HTTP on port **8080**. TLS stays on the outer reverse proxy. The image is published to `ghcr.io/norrang/yggdrasil-frontend` for `linux/amd64` and `linux/arm64`.
+
+Build and run it locally:
+
+```bash
+docker build -t yggdrasil-frontend .
+docker run --rm -p 8080:8080 yggdrasil-frontend
+```
+
+The app is then at `http://localhost:8080/`. `GET /health` returns `ok` for the outer proxy's health check.
+
+GitHub Actions builds the image on every push to `main` and tags it `latest` (plus `sha-<short>`). Pushing a git tag such as `v1.2.3` also publishes `1.2.3`, `1.2`, and `1`:
+
+```bash
+git tag v1.2.3
+git push origin v1.2.3
+```
+
+Point the outer Caddy at this container:
+
+```caddyfile
+yggdrasil.example.com {
+	reverse_proxy <this-container>:8080 {
+		health_uri /health
+		health_interval 30s
+	}
+}
+```
+
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
