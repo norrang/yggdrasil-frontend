@@ -1,4 +1,4 @@
-import { Component, inject, linkedSignal } from '@angular/core';
+import { Component, inject, linkedSignal, signal } from '@angular/core';
 import {
   MAT_DIALOG_DATA,
   MatDialogActions,
@@ -12,9 +12,10 @@ import { form, maxLength, required, submit } from '@angular/forms/signals';
 import { BackofficeApiClient } from '../../backoffice-api-client';
 import { ItemTypeResponse } from '../item-type-response';
 import { CreateOrUpdateItemTypeRequest } from '../create-or-update-item-type-request';
-import { firstValueFrom } from 'rxjs';
+import { finalize, firstValueFrom } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { HttpStatusCode } from '@angular/common/http';
 
 const EMPTY_FORM_MODEL: CreateOrUpdateItemTypeRequest = {
   name: '',
@@ -42,7 +43,9 @@ export class UpdateItemTypeModal {
 
   private readonly snackBar = inject(MatSnackBar);
   private readonly backofficeApiClient = inject(BackofficeApiClient);
+  protected isDeletingItemType = signal(false);
   protected itemTypeDetails = this.backofficeApiClient.getItemTypeById(this.data);
+
   private itemTypeModel = linkedSignal<ItemTypeResponse | undefined, CreateOrUpdateItemTypeRequest>(
     {
       source: this.itemTypeDetails.value,
@@ -74,5 +77,32 @@ export class UpdateItemTypeModal {
           return;
         });
     });
+  }
+
+  protected deleteItemType() {
+    this.isDeletingItemType.set(true);
+    this.backofficeApiClient
+      .deleteItemType(this.data)
+      .pipe(finalize(() => this.isDeletingItemType.set(false)))
+      .subscribe({
+        next: () => {
+          this.dialogRef.close(true);
+        },
+        error: (error) => {
+          if (error.status === HttpStatusCode.Conflict) {
+            this.snackBar.open(
+              'This item type cannot be deleted since it is currently associated with one or more orders.',
+              'Dismiss',
+              {
+                duration: 10000,
+              },
+            );
+            return;
+          }
+
+          console.error('Error deleting item type:', error);
+          this.snackBar.open('Failed to delete item type', 'Dismiss', { duration: 10000 });
+        },
+      });
   }
 }

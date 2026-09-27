@@ -5,16 +5,14 @@
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <div>
-    <button matButton (click)="dialogRef.close(false)">Cancel</button>
-    <button
-      matButton="filled"
-      (click)="createItemType()"
-      [showProgress]="itemTypeForm().submitting()"
-      [disabled]="!itemTypeForm().valid() || itemTypeForm().submitting()"
-    >
-      Update
-      <mat-progress-spinner progressIndicator mode="indeterminate" diameter="20" />
-    </button>
-  </div>
+  <button matButton (click)="dialogRef.close(false)">Cancel</button>
+  <button
+    matButton="filled"
+    (click)="createItemType()"
+    [showProgress]="itemTypeForm().submitting()"
+    [disabled]="!itemTypeForm().valid() || itemTypeForm().submitting()"
+  >
+    Update
+    <mat-progress-spinner progressIndicator mode="indeterminate" diameter="20" />
+  </button>
 </mat-dialog-actions>

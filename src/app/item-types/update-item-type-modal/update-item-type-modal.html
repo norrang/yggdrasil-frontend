@@ -13,17 +13,33 @@
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button matButton="outlined" class="delete-button" [disabled]="isLoadingItemTypeDetails">
+  <button
+    matButton="outlined"
+    class="delete-button"
+    [showProgress]="isDeletingItemType()"
+    [disabled]="itemTypeForm().submitting() || isLoadingItemTypeDetails || isDeletingItemType()"
+    (click)="deleteItemType()"
+  >
     Delete item type
+    <mat-progress-spinner progressIndicator mode="indeterminate" diameter="20" />
   </button>
   <div>
-    <button matButton (click)="dialogRef.close(false)">Cancel</button>
+    <button
+      matButton
+      (click)="dialogRef.close(false)"
+      [disabled]="isDeletingItemType() || itemTypeForm().submitting()"
+    >
+      Cancel
+    </button>
     <button
       matButton="filled"
       (click)="updateItemType()"
       [showProgress]="itemTypeForm().submitting()"
       [disabled]="
-        !itemTypeForm().valid() || itemTypeForm().submitting() || isLoadingItemTypeDetails
+        !itemTypeForm().valid() ||
+        itemTypeForm().submitting() ||
+        isLoadingItemTypeDetails ||
+        isDeletingItemType()
       "
     >
       Update
