@@ -37,3 +37,12 @@ body {
   margin: 0;
   height: 100%;
 }
+
+.delete-button {
+  @include mat.button-overrides(
+    (
+      outlined-outline-color: var(--mat-sys-error),
+      outlined-label-text-color: var(--mat-sys-error),
+    )
+  )
+}

@@ -1,1 +1,23 @@
-<p>manage-items-page works!</p>
+<div class="orders-heading">
+  <h3>Item types</h3>
+
+  <div>
+    <button matIconButton (click)="refreshItemTypes()" [disabled]="itemTypes.isLoading()">
+      <mat-icon>refresh</mat-icon>
+    </button>
+  </div>
+</div>
+
+@if (itemTypes.isLoading() && !itemTypes.hasValue()) {
+  <div class="spinner-container">
+    <mat-spinner [diameter]="48" />
+  </div>
+}
+
+@if (itemTypes.error()) {
+  <pre>{{ itemTypes.error() | json }}</pre>
+}
+
+@if (itemTypes.hasValue()) {
+  <app-item-type-table [itemTypes]="itemTypes.value()" (refreshItemTypes)="refreshItemTypes()" />
+}

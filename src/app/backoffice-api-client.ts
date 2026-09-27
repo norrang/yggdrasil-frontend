@@ -3,7 +3,7 @@ import { environment } from '../environments/environment';
 import { HttpClient, httpResource } from '@angular/common/http';
 import { ItemTypeResponse } from './item-types/item-type-response';
 import { BackofficeOrderResponse } from './orders/backoffice-order-response';
-import { CreateItemTypeRequest } from './item-types/create-item-type-request';
+import { CreateOrUpdateItemTypeRequest } from './item-types/create-or-update-item-type-request';
 import { OrderStatus } from './orders/order-status';
 import { UpdateOrderStatusRequest } from './orders/update-order-status-request';
 import { CommentResponse } from './orders/comment-response';
@@ -23,14 +23,14 @@ export class BackofficeApiClient {
     return httpResource<ItemTypeResponse>(() => `${this.BASE_API_URL}/item-types/${id}`);
   }
 
-  public createItemType(createItemTypeRequest: CreateItemTypeRequest) {
+  public createItemType(createItemTypeRequest: CreateOrUpdateItemTypeRequest) {
     return this.http.post<ItemTypeResponse>(
       `${this.BASE_API_URL}/item-types`,
       createItemTypeRequest,
     );
   }
 
-  public updateItemType(id: string, itemType: CreateItemTypeRequest) {
+  public updateItemType(id: string, itemType: CreateOrUpdateItemTypeRequest) {
     return this.http.put<ItemTypeResponse>(`${this.BASE_API_URL}/item-types/${id}`, itemType);
   }
 

@@ -1,0 +1,33 @@
+@let isLoadingItemTypeDetails = itemTypeDetails.isLoading();
+
+<h2 mat-dialog-title>Update item type</h2>
+
+<mat-dialog-content>
+  @if (isLoadingItemTypeDetails) {
+    <div class="spinner-container">
+      <mat-spinner diameter="64" />
+    </div>
+  } @else {
+    <app-item-type-form [itemTypeForm]="itemTypeForm" />
+  }
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button matButton="outlined" class="delete-button" [disabled]="isLoadingItemTypeDetails">
+    Delete item type
+  </button>
+  <div>
+    <button matButton (click)="dialogRef.close(false)">Cancel</button>
+    <button
+      matButton="filled"
+      (click)="updateItemType()"
+      [showProgress]="itemTypeForm().submitting()"
+      [disabled]="
+        !itemTypeForm().valid() || itemTypeForm().submitting() || isLoadingItemTypeDetails
+      "
+    >
+      Update
+      <mat-progress-spinner progressIndicator mode="indeterminate" diameter="20" />
+    </button>
+  </div>
+</mat-dialog-actions>

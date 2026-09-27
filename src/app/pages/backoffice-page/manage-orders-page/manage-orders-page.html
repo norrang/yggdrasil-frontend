@@ -2,7 +2,7 @@
   <h3>Orders</h3>
 
   <div>
-    <button matIconButton (click)="refreshOrders()">
+    <button matIconButton (click)="refreshOrders()" [disabled]="orders.isLoading()">
       <mat-icon>refresh</mat-icon>
     </button>
   </div>

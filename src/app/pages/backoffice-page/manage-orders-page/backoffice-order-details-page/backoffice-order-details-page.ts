@@ -28,7 +28,6 @@ export class BackofficeOrderDetailsPage {
       .afterClosed()
       .subscribe({
         next: (shouldRefresh: boolean) => {
-          console.log('SHOULD REFRESH', shouldRefresh);
           if (shouldRefresh) {
             this.refreshOrderDetails();
           }

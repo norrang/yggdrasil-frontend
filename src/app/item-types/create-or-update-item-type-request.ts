@@ -1,4 +1,4 @@
-export interface CreateItemTypeRequest {
+export interface CreateOrUpdateItemTypeRequest {
   name: string;
   imageUrl: string;
   quantityType: string;

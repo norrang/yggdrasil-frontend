@@ -1,0 +1,22 @@
+@if (itemTypeForm(); as itemType) {
+  <form [formRoot]="itemType">
+    <mat-form-field>
+      <mat-label>Item name</mat-label>
+      <input matInput type="text" [formField]="itemType.name" />
+      <mat-error>{{ itemType.name().errors()[0]?.message }}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Image URL</mat-label>
+      <input matInput type="text" [formField]="itemType.imageUrl" />
+      <mat-error>{{ itemType.imageUrl().errors()[0]?.message }}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Quantity type</mat-label>
+      <input matInput type="text" [formField]="itemType.quantityType" />
+      <mat-hint>E.g. 'stack(s)'</mat-hint>
+      <mat-error>{{ itemType.quantityType().errors()[0]?.message }}</mat-error>
+    </mat-form-field>
+    <mat-checkbox [formField]="itemType.enabled">Item type enabled</mat-checkbox>
+    <app-info-box>If the item type is enabled it's visible in the form</app-info-box>
+  </form>
+}
