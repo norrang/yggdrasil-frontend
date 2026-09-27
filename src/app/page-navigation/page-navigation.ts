@@ -21,6 +21,6 @@ export class PageNavigation {
   }
 
   protected signOut() {
-    this.oidcSecurityService.logoff();
+    this.oidcSecurityService.logoff().subscribe();
   }
 }

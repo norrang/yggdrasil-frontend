@@ -72,3 +72,8 @@ mat-card-content {
   flex-direction: column;
   gap: calc(var(--base-spacing) * 4);
 }
+
+.order-status {
+  font: var(--mat-sys-title-medium);
+  letter-spacing: var(--mat-sys-title-medium-tracking);
+}

@@ -1,6 +1,6 @@
 @let order = orderDetails();
 
-@if (!orderSummary()) {
+@if (orderView() !== OrderView.SUMMARY) {
   <div class="order-header">
     <h2>Order {{ order.orderNumber }}</h2>
     <div class="action-container">
@@ -12,7 +12,14 @@
       >
         <mat-icon>refresh</mat-icon>
       </button>
-      <mat-chip> {{ order.status }}</mat-chip>
+
+      @if (orderView() === OrderView.BACKOFFICE_DETAILS) {
+        <button matButton="filled" (click)="updateOrderStatus()" matTooltip="Update order status">
+          {{ order.status }}
+        </button>
+      } @else {
+        <p class="order-status">{{ order.status }}</p>
+      }
     </div>
   </div>
 }
@@ -44,6 +51,10 @@
     <section>
       <h3>Order specifics</h3>
       <dl>
+        @if (orderView() === OrderView.BACKOFFICE_DETAILS) {
+          <dt>Internal id</dt>
+          <dd>{{ 'id' in order ? order.id : '' }}</dd>
+        }
         <dt>Order placed</dt>
         <dd>{{ order.orderedAt | date: 'dd.MM.yyyy HH.mm.ss' }}</dd>
         <dt>Drop-off location</dt>
@@ -84,7 +95,7 @@
     </tr>
   </table>
 
-  @if (!orderSummary()) {
+  @if (orderView() !== OrderView.SUMMARY) {
     <div>
       <h3>Comments</h3>
       <div class="comment-container">

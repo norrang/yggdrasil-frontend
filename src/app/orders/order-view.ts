@@ -1,0 +1,5 @@
+export enum OrderView {
+  SUMMARY,
+  PUBLIC_DETAILS,
+  BACKOFFICE_DETAILS,
+}

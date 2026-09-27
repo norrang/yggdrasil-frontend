@@ -2,7 +2,9 @@
   <h2>Backoffice functions</h2>
 
   <nav>
-    <button matButton="tonal">Orders</button>
-    <button matButton="tonal">Items</button>
+    <button matButton="tonal" routerLink="manage-orders">Manage orders</button>
+    <button matButton="tonal" routerLink="manage-items">Manage items</button>
   </nav>
+
+  <router-outlet />
 </main>

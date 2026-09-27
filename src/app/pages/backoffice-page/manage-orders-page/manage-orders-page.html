@@ -1,0 +1,23 @@
+<div class="orders-heading">
+  <h3>Orders</h3>
+
+  <div>
+    <button matIconButton (click)="refreshOrders()">
+      <mat-icon>refresh</mat-icon>
+    </button>
+  </div>
+</div>
+
+@if (orders.isLoading() && !orders.hasValue()) {
+  <div class="spinner-container">
+    <mat-spinner [diameter]="48" />
+  </div>
+}
+
+@if (orders.error()) {
+  <pre>{{ orders.error() }}</pre>
+}
+
+@if (orders.hasValue()) {
+  <app-order-table [orders]="orders.value()" />
+}

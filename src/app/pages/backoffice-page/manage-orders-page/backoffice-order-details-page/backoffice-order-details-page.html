@@ -1,0 +1,11 @@
+<main class="page-container">
+  @if (orderDetails && orderDetails.hasValue()) {
+    <app-order-details
+      [orderDetails]="orderDetails.value()"
+      [orderView]="OrderView.BACKOFFICE_DETAILS"
+      [loadingOrderDetails]="orderDetails.isLoading()"
+      (updateStatus)="updateStatus($event)"
+      (refreshOrderDetails)="refreshOrderDetails()"
+    />
+  }
+</main>

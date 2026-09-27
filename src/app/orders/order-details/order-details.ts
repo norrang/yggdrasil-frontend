@@ -1,9 +1,8 @@
 import { Component, computed, input, output } from '@angular/core';
 import { PublicOrderResponse } from '../public-order-response';
 import { DatePipe, NgOptimizedImage } from '@angular/common';
-import { MatChip } from '@angular/material/chips';
 import { MatIcon } from '@angular/material/icon';
-import { MatIconButton } from '@angular/material/button';
+import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatTooltip } from '@angular/material/tooltip';
 import {
   MatCell,
@@ -20,10 +19,12 @@ import {
 } from '@angular/material/table';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { MatCard, MatCardContent, MatCardHeader } from '@angular/material/card';
+import { OrderView } from '../order-view';
+import { BackofficeOrderResponse } from '../backoffice-order-response';
+import { OrderStatusModalData } from '../order-status-modal-data';
 
 @Component({
   imports: [
-    MatChip,
     DatePipe,
     MatIcon,
     MatIconButton,
@@ -43,17 +44,32 @@ import { MatCard, MatCardContent, MatCardHeader } from '@angular/material/card';
     MatCard,
     MatCardContent,
     MatCardHeader,
+    MatButton,
   ],
   selector: 'app-order-details',
   styleUrl: './order-details.css',
   templateUrl: './order-details.html',
 })
 export class OrderDetails {
-  orderDetails = input.required<PublicOrderResponse>();
+  orderDetails = input.required<PublicOrderResponse | BackofficeOrderResponse>();
   loadingOrderDetails = input<boolean>(false);
-  orderSummary = input<boolean>(false);
+  orderView = input<OrderView>(OrderView.PUBLIC_DETAILS);
   refreshOrderDetails = output<void>();
+  updateStatus = output<OrderStatusModalData>();
 
   orderLines = toObservable(computed(() => this.orderDetails().lines));
   displayedColumns = ['image', 'name', 'quantity'];
+  protected readonly OrderView = OrderView;
+
+  updateOrderStatus() {
+    const orderDetails = this.orderDetails();
+    if (!('id' in orderDetails)) {
+      return;
+    }
+
+    this.updateStatus.emit({
+      id: orderDetails.id,
+      currentStatus: orderDetails.status,
+    });
+  }
 }

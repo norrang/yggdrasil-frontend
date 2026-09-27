@@ -6,6 +6,7 @@ export interface BackofficeOrderResponse {
   id: string;
   orderNumber: string;
   customerName: string;
+  customerEmail: string;
   characterName: string;
   dropOffLocation: string;
   status: OrderStatus;

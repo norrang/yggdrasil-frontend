@@ -1,4 +1,4 @@
-import { inject, Service } from '@angular/core';
+import { inject, Service, Signal } from '@angular/core';
 import { environment } from '../environments/environment';
 import { HttpClient, httpResource } from '@angular/common/http';
 import { ItemTypeResponse } from './item-types/item-type-response';
@@ -43,8 +43,8 @@ export class BackofficeApiClient {
     return httpResource<BackofficeOrderResponse[]>(() => `${this.BASE_API_URL}/orders`);
   }
 
-  public getOrderById(id: string) {
-    return httpResource<BackofficeOrderResponse>(() => `${this.BASE_API_URL}/orders/${id}`);
+  public getOrderByIdSignal(id: Signal<string>) {
+    return httpResource<BackofficeOrderResponse>(() => `${this.BASE_API_URL}/orders/${id()}`);
   }
 
   public updateOrderStatus(orderId: string, orderStatus: OrderStatus) {
