@@ -5,6 +5,9 @@
     <button matIconButton (click)="refreshItemTypes()" [disabled]="itemTypes.isLoading()">
       <mat-icon>refresh</mat-icon>
     </button>
+    <button matIconButton (click)="openCreateItemTypeModal()" [disabled]="itemTypes.isLoading()">
+      <mat-icon>add</mat-icon>
+    </button>
   </div>
 </div>
 
@@ -15,7 +18,10 @@
 }
 
 @if (itemTypes.error()) {
-  <pre>{{ itemTypes.error() | json }}</pre>
+  <app-info-box>
+    <p>An error occurred while loading the available item types:</p>
+    <pre>{{ itemTypes.error() | json }}</pre>
+  </app-info-box>
 }
 
 @if (itemTypes.hasValue()) {

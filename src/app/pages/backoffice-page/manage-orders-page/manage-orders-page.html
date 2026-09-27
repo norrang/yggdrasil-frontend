@@ -15,7 +15,10 @@
 }
 
 @if (orders.error()) {
-  <pre>{{ orders.error() }}</pre>
+  <app-info-box>
+    <p>An error occurred while loading the available orders:</p>
+    <pre>{{ orders.error() | json }}</pre>
+  </app-info-box>
 }
 
 @if (orders.hasValue()) {
