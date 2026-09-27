@@ -2,9 +2,18 @@
   <a routerLink="/"><h1>Yggdrasil</h1></a>
 
   <div class="links-container">
-    <button matButton="tonal" routerLink="/">Home</button>
+    <button
+      matButton="tonal"
+      routerLink="/"
+      routerLinkActive="active-page-button"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      Home
+    </button>
     @if (isSignedIn()) {
-      <button matButton="tonal" routerLink="backoffice">Backoffice</button>
+      <button matButton="tonal" routerLink="backoffice" routerLinkActive="active-page-button">
+        Backoffice
+      </button>
       <button matButton="tonal" (click)="signOut()">Sign out</button>
     } @else {
       <button matButton="tonal" (click)="signIn()">Sign in</button>

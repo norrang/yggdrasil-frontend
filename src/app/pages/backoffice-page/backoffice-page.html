@@ -1,10 +1,16 @@
 <main class="page-container">
-  <h2>Backoffice functions</h2>
+  <div class="backoffice-functions">
+    <h2>Backoffice functions</h2>
 
-  <nav>
-    <button matButton="tonal" routerLink="manage-orders">Manage orders</button>
-    <button matButton="tonal" routerLink="manage-items">Manage items</button>
-  </nav>
+    <nav>
+      <button matButton="tonal" routerLink="manage-orders" routerLinkActive="active-page-button">
+        Orders
+      </button>
+      <button matButton="tonal" routerLink="manage-items" routerLinkActive="active-page-button">
+        Items
+      </button>
+    </nav>
+  </div>
 
   <router-outlet />
 </main>

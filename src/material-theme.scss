@@ -46,3 +46,12 @@ body {
     )
   )
 }
+
+.active-page-button {
+  @include mat.button-overrides(
+      (
+        tonal-container-color: var(--mat-sys-tertiary-container),
+        tonal-label-text-color: var(--mat-sys-on-tertiary-container),
+      )
+  )
+}

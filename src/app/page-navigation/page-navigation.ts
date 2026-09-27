@@ -1,11 +1,11 @@
 import { Component, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { MatButton } from '@angular/material/button';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { AccountStore } from '../auth/account-store';
 
 @Component({
-  imports: [RouterLink, MatButton],
+  imports: [RouterLink, MatButton, RouterLinkActive],
   selector: 'app-page-navigation',
   styleUrl: './page-navigation.css',
   templateUrl: './page-navigation.html',

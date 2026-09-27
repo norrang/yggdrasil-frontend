@@ -3,3 +3,16 @@ nav {
   flex-direction: row;
   gap: calc(var(--base-spacing) * 2);
 }
+
+.backoffice-functions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  nav {
+    display: flex;
+    flex-direction: row;
+    gap: calc(var(--base-spacing) * 4);
+  }
+}
