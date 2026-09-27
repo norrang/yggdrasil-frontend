@@ -12,7 +12,7 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
   styleUrl: './order-lookup-page.css',
   templateUrl: './order-lookup-page.html',
 })
-export class OrderLookupPage implements OnInit {
+export default class OrderLookupPage implements OnInit {
   orderNumber = input.required<string>();
 
   protected readonly orderLookupStore = inject(OrderLookupStore);

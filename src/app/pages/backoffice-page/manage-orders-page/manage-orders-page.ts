@@ -13,7 +13,7 @@ import { JsonPipe } from '@angular/common';
   styleUrl: './manage-orders-page.css',
   templateUrl: './manage-orders-page.html',
 })
-export class ManageOrdersPage {
+export default class ManageOrdersPage {
   protected readonly backofficeApiClient = inject(BackofficeApiClient);
   protected readonly orders = this.backofficeApiClient.getOrders();
 

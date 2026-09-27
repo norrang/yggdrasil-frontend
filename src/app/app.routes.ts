@@ -1,10 +1,5 @@
 import { Routes } from '@angular/router';
 import { HomePage } from './pages/home-page/home-page';
-import { RegisterOrderPage } from './pages/register-order-page/register-order-page';
-import { BackofficePage } from './pages/backoffice-page/backoffice-page';
-import { OrderLookupPage } from './pages/order-lookup-page/order-lookup-page';
-import { ManageItemsPage } from './pages/backoffice-page/manage-items-page/manage-items-page';
-import { ManageOrdersPage } from './pages/backoffice-page/manage-orders-page/manage-orders-page';
 import { BackofficeOrderDetailsPage } from './pages/backoffice-page/manage-orders-page/backoffice-order-details-page/backoffice-order-details-page';
 
 export const routes: Routes = [
@@ -14,15 +9,15 @@ export const routes: Routes = [
   },
   {
     path: 'register',
-    component: RegisterOrderPage,
+    loadComponent: () => import('./pages/register-order-page/register-order-page'),
   },
   {
     path: 'order-lookup/:orderNumber',
-    component: OrderLookupPage,
+    loadComponent: () => import('./pages/order-lookup-page/order-lookup-page'),
   },
   {
     path: 'backoffice',
-    component: BackofficePage,
+    loadComponent: () => import('./pages/backoffice-page/backoffice-page'),
     children: [
       {
         path: '',
@@ -31,11 +26,12 @@ export const routes: Routes = [
       },
       {
         path: 'manage-orders',
-        component: ManageOrdersPage,
+        loadComponent: () =>
+          import('./pages/backoffice-page/manage-orders-page/manage-orders-page'),
       },
       {
         path: 'manage-items',
-        component: ManageItemsPage,
+        loadComponent: () => import('./pages/backoffice-page/manage-items-page/manage-items-page'),
       },
     ],
   },

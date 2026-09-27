@@ -8,4 +8,4 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
   styleUrl: './backoffice-page.css',
   templateUrl: './backoffice-page.html',
 })
-export class BackofficePage {}
+export default class BackofficePage {}

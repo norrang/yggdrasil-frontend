@@ -13,7 +13,7 @@ enum RegisterOrderView {
   styleUrl: './register-order-page.css',
   templateUrl: './register-order-page.html',
 })
-export class RegisterOrderPage {
+export default class RegisterOrderPage {
   protected readonly registerOrderViewState = signal<RegisterOrderView>(RegisterOrderView.FORM);
   protected readonly RegisterOrderView = RegisterOrderView;
 

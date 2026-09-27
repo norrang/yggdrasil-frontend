@@ -15,7 +15,7 @@ import { CreateItemTypeModal } from '../../../item-types/create-item-type-modal/
   styleUrl: './manage-items-page.css',
   templateUrl: './manage-items-page.html',
 })
-export class ManageItemsPage {
+export default class ManageItemsPage {
   protected readonly backofficeApiClient = inject(BackofficeApiClient);
   protected readonly itemTypes = this.backofficeApiClient.getItemTypes();
   private readonly dialog = inject(MatDialog);
