@@ -1,12 +1,8 @@
 dl {
   display: grid;
   grid-template-columns: max-content minmax(0, 1fr);
-  gap: 0.25rem 1rem;
+  gap: var(--space-1) var(--space-4);
   margin: 0;
-}
-
-dl > div {
-  display: contents; /* children participate in the parent grid */
 }
 
 dt {
@@ -20,24 +16,16 @@ dd {
   white-space: pre-wrap;
 }
 
-.order-header {
+.action-container {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
   align-items: center;
-
-  .action-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: calc(var(--base-spacing) * 4);
-  }
+  gap: var(--space-4);
 }
 
 .section-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: calc(var(--base-spacing) * 16);
+  gap: var(--space-16);
 }
 
 .mat-column-image {
@@ -57,20 +45,19 @@ dd {
 .order-details-container {
   display: flex;
   flex-direction: column;
-  gap: calc(var(--base-spacing) * 16);
+  gap: var(--space-16);
 }
 
-mat-card-content {
-  p {
-    font: var(--mat-sys-body-large);
-    overflow-wrap: anywhere;
-  }
+mat-card-content p {
+  font: var(--mat-sys-body-large);
+  letter-spacing: var(--mat-sys-body-large-tracking);
+  overflow-wrap: anywhere;
 }
 
 .comment-container {
   display: flex;
   flex-direction: column;
-  gap: calc(var(--base-spacing) * 4);
+  gap: var(--space-4);
 }
 
 .order-status {

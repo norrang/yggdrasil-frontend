@@ -8,7 +8,6 @@ import { PageNavigation } from './page-navigation/page-navigation';
 @Component({
   imports: [RouterOutlet, PageNavigation],
   selector: 'app-root',
-  styleUrl: './app.css',
   templateUrl: './app.html',
 })
 export class App {

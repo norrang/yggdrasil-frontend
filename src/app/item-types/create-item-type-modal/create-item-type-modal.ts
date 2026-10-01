@@ -31,7 +31,6 @@ const EMPTY_FORM_MODEL: CreateOrUpdateItemTypeRequest = {
     MatProgressSpinner,
   ],
   selector: 'app-create-item-type-modal',
-  styleUrl: './create-item-type-modal.css',
   templateUrl: './create-item-type-modal.html',
 })
 export class CreateItemTypeModal {

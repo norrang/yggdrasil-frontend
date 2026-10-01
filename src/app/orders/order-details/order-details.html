@@ -1,7 +1,7 @@
 @let order = orderDetails();
 
 @if (orderView() !== OrderView.SUMMARY) {
-  <div class="order-header">
+  <div class="heading-row">
     <h2>Order {{ order.orderNumber }}</h2>
     <div class="action-container">
       <button

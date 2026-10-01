@@ -34,7 +34,6 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
     MatProgressSpinner,
   ],
   selector: 'app-update-order-status-modal',
-  styleUrl: './update-order-status-modal.css',
   templateUrl: './update-order-status-modal.html',
 })
 export class UpdateOrderStatusModal {

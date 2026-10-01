@@ -10,7 +10,6 @@ import { JsonPipe } from '@angular/common';
 @Component({
   imports: [MatProgressSpinner, OrderTable, MatIconButton, MatIcon, InfoBox, JsonPipe],
   selector: 'app-manage-orders-page',
-  styleUrl: './manage-orders-page.css',
   templateUrl: './manage-orders-page.html',
 })
 export default class ManageOrdersPage {

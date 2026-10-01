@@ -9,7 +9,6 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
 @Component({
   imports: [OrderDetails, JsonPipe, MatProgressSpinner],
   selector: 'app-order-lookup-page',
-  styleUrl: './order-lookup-page.css',
   templateUrl: './order-lookup-page.html',
 })
 export default class OrderLookupPage implements OnInit {

@@ -1,28 +1,63 @@
-/* You can add global styles to this file, and also import other style files */
+/* App-wide styles. Angular Material theming and component overrides live in material-theme.scss. */
 :root {
-  --base-spacing: 0.25rem;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+}
+
+/* Layout breakpoint used across the app: 1100px (media queries can't read custom properties). */
+
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  height: 100%;
 }
 
 h2 {
-  font-size: 1.7rem;
-  line-height: calc(1.75 / 1.25);
+  font: var(--mat-sys-headline-medium);
+  letter-spacing: var(--mat-sys-headline-medium-tracking);
 }
 
 h3 {
-  font-size: 1.4rem;
-  line-height: calc(2 / 1.5);
+  font: var(--mat-sys-title-large);
+  letter-spacing: var(--mat-sys-title-large-tracking);
 }
 
 .page-container {
-  padding: calc(var(--base-spacing) * 12) calc(var(--base-spacing) * 16);
+  padding: var(--space-12) var(--space-16);
   display: flex;
   flex-direction: column;
-  gap: calc(var(--base-spacing) * 4);
+  gap: var(--space-4);
 }
 
 .spinner-container {
-  padding: calc(var(--base-spacing) * 8);
+  padding: var(--space-8);
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+/* A heading with actions aligned to the opposite side. */
+.heading-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Tables whose rows open something when clicked. */
+.clickable-rows .mat-mdc-row {
+  cursor: pointer;
+
+  &:hover .mat-mdc-cell {
+    background-color: var(--mat-sys-surface-variant);
+  }
 }

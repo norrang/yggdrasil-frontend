@@ -1,4 +1,4 @@
-<table mat-table [dataSource]="itemTypes()">
+<table mat-table class="clickable-rows" [dataSource]="itemTypes()">
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef>Name</th>
     <td mat-cell *matCellDef="let element">{{ element.name }}</td>

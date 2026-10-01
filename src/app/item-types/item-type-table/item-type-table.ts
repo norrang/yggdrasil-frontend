@@ -31,7 +31,6 @@ import { UpdateItemTypeModal } from '../update-item-type-modal/update-item-type-
     MatNoDataRow,
   ],
   selector: 'app-item-type-table',
-  styleUrl: './item-type-table.css',
   templateUrl: './item-type-table.html',
 })
 export class ItemTypeTable {

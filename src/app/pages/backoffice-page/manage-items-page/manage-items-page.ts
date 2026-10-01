@@ -12,7 +12,6 @@ import { CreateItemTypeModal } from '../../../item-types/create-item-type-modal/
 @Component({
   imports: [ItemTypeTable, MatIcon, MatIconButton, MatProgressSpinner, JsonPipe, InfoBox],
   selector: 'app-manage-items-page',
-  styleUrl: './manage-items-page.css',
   templateUrl: './manage-items-page.html',
 })
 export default class ManageItemsPage {

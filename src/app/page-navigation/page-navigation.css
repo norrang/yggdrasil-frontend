@@ -1,7 +1,6 @@
 nav {
   height: 6rem;
-  padding: 1rem;
-
+  padding: var(--space-4);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -9,19 +8,20 @@ nav {
   background-size: cover;
 
   a {
-    margin-left: 4rem;
+    margin-left: var(--space-16);
     text-decoration: none;
     color: var(--mat-sys-on-tertiary);
   }
 
   h1 {
-    line-height: 0;
-    font-size: 2.25rem;
+    margin: 0;
+    font: var(--mat-sys-display-small);
+    letter-spacing: var(--mat-sys-display-small-tracking);
   }
 }
 
 .links-container {
-  margin-right: 4rem;
+  margin-right: var(--space-16);
   display: flex;
-  gap: calc(var(--base-spacing) * 4);
+  gap: var(--space-4);
 }

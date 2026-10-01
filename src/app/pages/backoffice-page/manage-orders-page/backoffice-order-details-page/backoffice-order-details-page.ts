@@ -9,7 +9,6 @@ import { OrderStatusModalData } from '../../../../orders/order-status-modal-data
 @Component({
   imports: [OrderDetails],
   selector: 'app-backoffice-order-details-page',
-  styleUrl: './backoffice-order-details-page.css',
   templateUrl: './backoffice-order-details-page.html',
 })
 export class BackofficeOrderDetailsPage {

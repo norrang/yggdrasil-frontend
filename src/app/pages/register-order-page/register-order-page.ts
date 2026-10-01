@@ -10,7 +10,6 @@ enum RegisterOrderView {
 @Component({
   imports: [RegisterOrderForm, RegisterOrderResult],
   selector: 'app-register-order-page',
-  styleUrl: './register-order-page.css',
   templateUrl: './register-order-page.html',
 })
 export default class RegisterOrderPage {
