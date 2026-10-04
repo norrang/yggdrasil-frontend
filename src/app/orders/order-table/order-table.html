@@ -23,12 +23,23 @@
 
   <ng-container matColumnDef="dropOffLocation">
     <th mat-header-cell *matHeaderCellDef>Drop off location</th>
-    <td mat-cell *matCellDef="let element">{{ element.dropOffLocations }}</td>
+    <td mat-cell *matCellDef="let element">{{ element.dropOffLocation }}</td>
   </ng-container>
 
   <ng-container matColumnDef="status">
     <th mat-header-cell *matHeaderCellDef>Status</th>
     <td mat-cell *matCellDef="let element">{{ element.status }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element">
+      <div class="icon-container">
+        @if (element.customerEmail) {
+          <mat-icon>forward_to_inbox</mat-icon>
+        }
+      </div>
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="comments">
