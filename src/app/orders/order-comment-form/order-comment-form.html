@@ -1,0 +1,20 @@
+<form [formRoot]="commentForm">
+  <mat-form-field>
+    <mat-label>Write a new comment</mat-label>
+    <textarea matInput [rows]="3" [formField]="commentForm.body"></textarea>
+    <mat-error>{{ commentForm.body().errors()[0]?.message }}</mat-error>
+  </mat-form-field>
+  <mat-checkbox [formField]="commentForm.private">Hide comment from customer</mat-checkbox>
+
+  <div class="form-actions">
+    <button matButton (click)="resetForm()">Clear</button>
+    <button
+      matButton="filled"
+      [showProgress]="commentForm().submitting()"
+      [disabled]="!commentForm().valid() || commentForm().submitting()"
+    >
+      Publish
+      <mat-progress-spinner progressIndicator mode="indeterminate" diameter="20" />
+    </button>
+  </div>
+</form>

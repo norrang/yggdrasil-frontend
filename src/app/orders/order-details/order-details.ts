@@ -22,6 +22,8 @@ import { MatCard, MatCardContent, MatCardHeader } from '@angular/material/card';
 import { OrderView } from '../order-view';
 import { BackofficeOrderResponse } from '../backoffice-order-response';
 import { OrderStatusModalData } from '../order-status-modal-data';
+import { OrderCommentForm } from '../order-comment-form/order-comment-form';
+import { MatDivider } from '@angular/material/list';
 
 @Component({
   imports: [
@@ -45,6 +47,8 @@ import { OrderStatusModalData } from '../order-status-modal-data';
     MatCardContent,
     MatCardHeader,
     MatButton,
+    OrderCommentForm,
+    MatDivider,
   ],
   selector: 'app-order-details',
   styleUrl: './order-details.css',
