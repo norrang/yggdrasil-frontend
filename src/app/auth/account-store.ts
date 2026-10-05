@@ -8,6 +8,7 @@ export class AccountStore {
   private _hasCheckedAuth = signal(false);
   private _signInState = computed(() => this.oidcSecurityService.authenticated().isAuthenticated);
   private _userName = computed(() => this.oidcSecurityService.userData()?.userData?.name);
+  private _email = computed(() => this.oidcSecurityService.userData()?.userData?.email);
   private _characterName = computed(
     () => this.oidcSecurityService.userData()?.userData?.valheim_character_name,
   );
@@ -26,6 +27,10 @@ export class AccountStore {
 
   get userName() {
     return this._userName;
+  }
+
+  get email() {
+    return this._email;
   }
 
   get characterName() {

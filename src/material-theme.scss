@@ -50,3 +50,15 @@ body {
       )
   )
 }
+
+// Mutes a section by using the secondary palette wherever components would use primary.
+.secondary-colors {
+  @include mat.theme-overrides(
+    (
+      primary: var(--mat-sys-secondary),
+      on-primary: var(--mat-sys-on-secondary),
+      primary-container: var(--mat-sys-secondary-container),
+      on-primary-container: var(--mat-sys-on-secondary-container),
+    )
+  );
+}

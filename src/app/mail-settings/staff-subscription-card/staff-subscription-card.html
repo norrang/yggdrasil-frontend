@@ -1,0 +1,60 @@
+@let details = subscriptionDetails();
+
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Notification status</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    @if (subscription().isLoading() && !details) {
+      <div class="spinner-container">
+        <mat-spinner [diameter]="48" />
+      </div>
+    } @else if (details) {
+      <dl>
+        <dt>Email</dt>
+        <dd>{{ details.email }}</dd>
+        <dt>New orders</dt>
+        <dd>{{ details.newOrders ? 'On' : 'Off' }}</dd>
+      </dl>
+      @if (!details.mailEnabled) {
+        <app-info-box>
+          Email sending is turned off in the backend, so no emails will be sent right now.
+        </app-info-box>
+      }
+    } @else if (isNotSubscribed()) {
+      <p>You are not receiving email notifications.</p>
+    } @else if (otherError()) {
+      <app-info-box>
+        <p>An error occurred while loading your email subscription:</p>
+        <pre>{{ otherError() | json }}</pre>
+      </app-info-box>
+    }
+  </mat-card-content>
+
+  @if (details) {
+    <mat-card-actions>
+      <button
+        matButton="outlined"
+        class="delete-button"
+        [showProgress]="isDisabling()"
+        [disabled]="isDisabling() || subscription().isLoading()"
+        (click)="disableSubscription()"
+      >
+        Disable notifications
+        <mat-progress-spinner progressIndicator mode="indeterminate" diameter="20" />
+      </button>
+      <button
+        matButton="tonal"
+        [disabled]="isDisabling() || subscription().isLoading()"
+        (click)="openSubscriptionModal(details)"
+      >
+        Edit email
+      </button>
+    </mat-card-actions>
+  } @else if (isNotSubscribed()) {
+    <mat-card-actions>
+      <button matButton="filled" (click)="openSubscriptionModal(null)">Enable notifications</button>
+    </mat-card-actions>
+  }
+</mat-card>
