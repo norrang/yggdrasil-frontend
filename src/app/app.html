@@ -1,3 +1,5 @@
 <app-page-navigation />
 
-<router-outlet />
+@if (hasCheckedAuth()) {
+  <router-outlet />
+}
