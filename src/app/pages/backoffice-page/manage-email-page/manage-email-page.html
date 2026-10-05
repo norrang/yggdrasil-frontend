@@ -1,0 +1,17 @@
+<div class="heading-row">
+  <h3>Email notifications</h3>
+
+  <button
+    matIconButton
+    aria-label="Refresh email subscription"
+    (click)="refreshSubscription()"
+    [disabled]="subscription.isLoading()"
+  >
+    <mat-icon>refresh</mat-icon>
+  </button>
+</div>
+
+<div class="card-grid">
+  <app-staff-subscription-card [subscription]="subscription" />
+  <app-test-email-card />
+</div>

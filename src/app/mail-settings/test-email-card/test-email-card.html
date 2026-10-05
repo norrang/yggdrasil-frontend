@@ -1,0 +1,26 @@
+<mat-card appearance="outlined" class="secondary-colors">
+  <mat-card-header>
+    <mat-card-title>Test email</mat-card-title>
+    <mat-card-subtitle>Debug tool for checking that the backend can send email</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <form [formRoot]="testEmailForm">
+      <mat-form-field>
+        <mat-label>Recipient</mat-label>
+        <input matInput type="email" autocomplete="email" [formField]="testEmailForm.to" />
+        <mat-error>{{ testEmailForm.to().errors()[0]?.message }}</mat-error>
+      </mat-form-field>
+
+      <button
+        matButton="tonal"
+        type="submit"
+        [showProgress]="testEmailForm().submitting()"
+        [disabled]="!testEmailForm().valid() || testEmailForm().submitting()"
+      >
+        Send test email
+        <mat-progress-spinner progressIndicator mode="indeterminate" diameter="20" />
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>

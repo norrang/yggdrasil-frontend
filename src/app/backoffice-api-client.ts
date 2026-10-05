@@ -8,6 +8,9 @@ import { OrderStatus } from './orders/order-status';
 import { UpdateOrderStatusRequest } from './orders/update-order-status-request';
 import { CommentResponse } from './orders/comment-response';
 import { AddCommentRequest } from './orders/add-comment-request';
+import { TestEmailRequest } from './mail-settings/test-email-request';
+import { StaffSubscriptionResponse } from './mail-settings/staff-subscription-response';
+import { StaffSubscriptionRequest } from './mail-settings/staff-subscription-request';
 
 @Service()
 export class BackofficeApiClient {
@@ -58,5 +61,27 @@ export class BackofficeApiClient {
       body: comment,
       private: isPrivateComment,
     } as AddCommentRequest);
+  }
+
+  // Staff subscriptions
+  public sendTestEmail(testEmailRequest: TestEmailRequest) {
+    return this.http.post<void>(`${this.BASE_API_URL}/mail/test`, testEmailRequest);
+  }
+
+  public getUsersStaffEmailSubscription() {
+    return httpResource<StaffSubscriptionResponse>(() => `${this.BASE_API_URL}/mail/subscription`);
+  }
+
+  public createOrReplaceUsersStaffEmailSubscription(
+    staffSubscriptionRequest: StaffSubscriptionRequest,
+  ) {
+    return this.http.put<StaffSubscriptionResponse>(
+      `${this.BASE_API_URL}/mail/subscription`,
+      staffSubscriptionRequest,
+    );
+  }
+
+  public deleteUsersStaffEmailSubscription() {
+    return this.http.delete<StaffSubscriptionResponse>(`${this.BASE_API_URL}/mail/subscription`);
   }
 }

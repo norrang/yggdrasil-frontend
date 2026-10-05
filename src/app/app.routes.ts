@@ -33,6 +33,10 @@ export const routes: Routes = [
         path: 'manage-items',
         loadComponent: () => import('./pages/backoffice-page/manage-items-page/manage-items-page'),
       },
+      {
+        path: 'manage-email',
+        loadComponent: () => import('./pages/backoffice-page/manage-email-page/manage-email-page'),
+      },
     ],
   },
   {
