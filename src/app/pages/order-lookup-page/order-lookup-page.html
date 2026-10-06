@@ -12,11 +12,17 @@
       </div>
     }
     @if (orderDetailsError(); as errorDetails) {
-      @if (errorDetails.status === HttpStatusCode.NotFound) {
-        <p>Order details not found for order with order number {{ orderNumber() }}</p>
-      } @else {
-        <p>An error occurred while loading order details!</p>
+      <div class="heading-row">
+        @if (errorDetails.status === HttpStatusCode.NotFound) {
+          <p>Order details not found for order with order number {{ orderNumber() }}</p>
+        } @else {
+          <p>An error occurred while loading order details!</p>
+        }
 
+        <a matButton routerLink="/">Back</a>
+      </div>
+
+      @if (errorDetails.status !== HttpStatusCode.NotFound) {
         <pre>{{ errorDetails | json }}</pre>
       }
     }

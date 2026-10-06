@@ -24,6 +24,7 @@ import { BackofficeOrderResponse } from '../backoffice-order-response';
 import { OrderStatusModalData } from '../order-status-modal-data';
 import { OrderCommentForm } from '../order-comment-form/order-comment-form';
 import { MatDivider } from '@angular/material/list';
+import { RouterLink } from '@angular/router';
 
 @Component({
   imports: [
@@ -49,6 +50,7 @@ import { MatDivider } from '@angular/material/list';
     MatButton,
     OrderCommentForm,
     MatDivider,
+    RouterLink,
   ],
   selector: 'app-order-details',
   styleUrl: './order-details.css',
@@ -58,6 +60,7 @@ export class OrderDetails {
   orderDetails = input.required<PublicOrderResponse | BackofficeOrderResponse>();
   loadingOrderDetails = input<boolean>(false);
   orderView = input<OrderView>(OrderView.PUBLIC_DETAILS);
+  backLink = input<string>('/');
   refreshOrderDetails = output<void>();
   updateStatus = output<OrderStatusModalData>();
 
