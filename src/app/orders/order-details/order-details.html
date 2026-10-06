@@ -4,6 +4,8 @@
   <div class="heading-row">
     <h2>Order {{ order.orderNumber }}</h2>
     <div class="action-container">
+      <a matButton [routerLink]="backLink()">Back</a>
+
       <button
         matIconButton
         matTooltip="Refresh order details"

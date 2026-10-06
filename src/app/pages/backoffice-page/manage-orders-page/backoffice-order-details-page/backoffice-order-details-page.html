@@ -3,6 +3,7 @@
     <app-order-details
       [orderDetails]="orderDetails.value()"
       [orderView]="OrderView.BACKOFFICE_DETAILS"
+      backLink="/backoffice/manage-orders"
       [loadingOrderDetails]="orderDetails.isLoading()"
       (updateStatus)="updateStatus($event)"
       (refreshOrderDetails)="refreshOrderDetails()"

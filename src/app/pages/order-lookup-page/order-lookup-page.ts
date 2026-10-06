@@ -5,9 +5,11 @@ import { OrderDetails } from '../../orders/order-details/order-details';
 import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { JsonPipe } from '@angular/common';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { MatButton } from '@angular/material/button';
+import { RouterLink } from '@angular/router';
 
 @Component({
-  imports: [OrderDetails, JsonPipe, MatProgressSpinner],
+  imports: [OrderDetails, JsonPipe, MatProgressSpinner, MatButton, RouterLink],
   selector: 'app-order-lookup-page',
   templateUrl: './order-lookup-page.html',
 })
