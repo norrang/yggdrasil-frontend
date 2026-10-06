@@ -4,9 +4,10 @@ import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { catchError, finalize, of } from 'rxjs';
 import { AccountStore } from './auth/account-store';
 import { PageNavigation } from './page-navigation/page-navigation';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @Component({
-  imports: [RouterOutlet, PageNavigation],
+  imports: [RouterOutlet, PageNavigation, MatProgressSpinner],
   selector: 'app-root',
   templateUrl: './app.html',
 })

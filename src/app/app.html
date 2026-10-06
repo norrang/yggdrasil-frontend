@@ -2,4 +2,8 @@
 
 @if (hasCheckedAuth()) {
   <router-outlet />
+} @else {
+  <div class="spinner-container">
+    <mat-spinner diameter="64" />
+  </div>
 }
