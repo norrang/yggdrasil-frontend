@@ -7,7 +7,6 @@ import {
   MatLabel,
   MatSuffix,
 } from '@angular/material/input';
-import { PublicItemTypeStore } from '../../item-types/public-item-type-store';
 import { NgOptimizedImage } from '@angular/common';
 import {
   applyEach,
@@ -70,7 +69,7 @@ interface OrderModelLine extends PublicItemTypeResponse {
 export class RegisterOrderForm {
   moveToResultView = output<void>();
 
-  protected readonly itemTypesResource = inject(PublicItemTypeStore).itemTypesResource;
+  protected readonly itemTypesResource = inject(PublicApiClient).getItemTypes();
   protected readonly publicApiClient = inject(PublicApiClient);
   protected readonly registerOrderStateStore = inject(RegisterOrderStateStore);
   protected readonly previousOrderNumbersStore = inject(PreviousOrderNumbersStore);
