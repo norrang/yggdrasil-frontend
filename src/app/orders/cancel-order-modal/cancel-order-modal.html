@@ -1,0 +1,43 @@
+<h2 mat-dialog-title>{{ isRequest ? 'Request order cancellation' : 'Cancel order' }}</h2>
+
+<form [formRoot]="cancelOrderForm">
+  <mat-dialog-content>
+    @if (isRequest) {
+      <p>
+        Order {{ data.orderNumber }} is already being worked on, so the staff will review your
+        request and decide whether to cancel it. You can only send one cancellation request.
+      </p>
+    } @else {
+      <p>Order {{ data.orderNumber }} will be cancelled straight away. This cannot be undone.</p>
+    }
+
+    <mat-form-field>
+      <mat-label>Reason (optional)</mat-label>
+      <textarea matInput [rows]="3" [formField]="cancelOrderForm.reason"></textarea>
+      <mat-hint align="end"
+        >{{ cancelOrderForm.reason().value().length }} / {{ MAX_REASON_LENGTH }}</mat-hint
+      >
+      <mat-error>{{ cancelOrderForm.reason().errors()[0]?.message }}</mat-error>
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button
+      matButton
+      type="button"
+      (click)="dialogRef.close(false)"
+      [disabled]="cancelOrderForm().submitting()"
+    >
+      Keep order
+    </button>
+    <button
+      matButton="filled"
+      type="submit"
+      [showProgress]="cancelOrderForm().submitting()"
+      [disabled]="!cancelOrderForm().valid() || cancelOrderForm().submitting()"
+    >
+      {{ isRequest ? 'Send request' : 'Cancel order' }}
+      <mat-progress-spinner progressIndicator mode="indeterminate" diameter="20" />
+    </button>
+  </mat-dialog-actions>
+</form>

@@ -4,6 +4,7 @@ import { HttpClient, httpResource } from '@angular/common/http';
 import { PublicItemTypeResponse } from './item-types/public-item-type-response';
 import { PublicOrderResponse } from './orders/public-order-response';
 import { CreateOrderRequest } from './orders/create-order-request';
+import { CancelOrderRequest } from './orders/cancel-order-request';
 
 @Service()
 export class PublicApiClient {
@@ -20,5 +21,12 @@ export class PublicApiClient {
 
   public placeOrder(createOrderRequest: CreateOrderRequest) {
     return this.http.post<PublicOrderResponse>(`${this.BASE_API_URL}/orders`, createOrderRequest);
+  }
+
+  public cancelOrder(orderNumber: string, cancelOrderRequest: CancelOrderRequest) {
+    return this.http.post<PublicOrderResponse>(
+      `${this.BASE_API_URL}/orders/${orderNumber}/cancellation`,
+      cancelOrderRequest,
+    );
   }
 }

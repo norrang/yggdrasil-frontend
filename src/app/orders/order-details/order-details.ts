@@ -22,6 +22,7 @@ import { MatCard, MatCardContent, MatCardHeader } from '@angular/material/card';
 import { OrderView } from '../order-view';
 import { BackofficeOrderResponse } from '../backoffice-order-response';
 import { OrderStatusModalData } from '../order-status-modal-data';
+import { CancelOrderModalData } from '../cancel-order-modal-data';
 import { OrderCommentForm } from '../order-comment-form/order-comment-form';
 import { MatDivider } from '@angular/material/list';
 import { RouterLink } from '@angular/router';
@@ -66,6 +67,7 @@ export class OrderDetails {
   backLink = input<string>('/');
   refreshOrderDetails = output<void>();
   updateStatus = output<OrderStatusModalData>();
+  cancelOrder = output<CancelOrderModalData>();
 
   orderLines = toObservable(computed(() => this.orderDetails().lines));
   displayedColumns = ['image', 'name', 'quantity'];

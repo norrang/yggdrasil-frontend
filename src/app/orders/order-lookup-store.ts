@@ -2,6 +2,7 @@ import { inject, Service, signal } from '@angular/core';
 import { PublicApiClient } from '../public-api-client';
 import { PublicOrderResponse } from './public-order-response';
 import { firstValueFrom, tap } from 'rxjs';
+import { CancelOrderRequest } from './cancel-order-request';
 
 @Service()
 export class OrderLookupStore {
@@ -29,5 +30,14 @@ export class OrderLookupStore {
         .getOrderByOrderNumber(orderNumber)
         .pipe(tap((orderDetails) => this._storedOrderDetails.set(orderDetails))),
     ).finally(() => this._loadingOrderDetails.set(false));
+  }
+
+  async cancelOrder(orderNumber: string, cancelOrderRequest: CancelOrderRequest) {
+    // The response is the updated order, so there is no need to look it up again
+    return firstValueFrom(
+      this.publicApiClient
+        .cancelOrder(orderNumber, cancelOrderRequest)
+        .pipe(tap((orderDetails) => this._storedOrderDetails.set(orderDetails))),
+    );
   }
 }
