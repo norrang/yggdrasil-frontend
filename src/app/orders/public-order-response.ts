@@ -5,12 +5,14 @@ import { OrderLineResponse } from './order-line-response';
 export interface PublicOrderResponse {
   orderNumber: string;
   customerName: string;
-  customerEmail: string;
+  customerEmail: string | null;
   characterName: string;
   dropOffLocation: string;
   status: OrderStatus;
   orderedAt: Date;
-  customerNote: string;
+  customerNote: string | null;
+  cancellationRequestedAt: Date | null;
+  cancellationReason: string | null;
   lines: OrderLineResponse[];
   comments: CommentResponse[];
 }

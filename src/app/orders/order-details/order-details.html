@@ -1,4 +1,8 @@
 @let order = orderDetails();
+@let cancellable =
+  orderView() === OrderView.PUBLIC_DETAILS &&
+  !order.cancellationRequestedAt &&
+  (order.status === OrderStatus.PENDING || order.status === OrderStatus.IN_PROGRESS);
 
 @if (orderView() !== OrderView.SUMMARY) {
   <div class="heading-row">
@@ -15,6 +19,18 @@
         <mat-icon>refresh</mat-icon>
       </button>
 
+      @if (cancellable) {
+        <button
+          matIconButton
+          [matTooltip]="
+            order.status === OrderStatus.PENDING ? 'Cancel order' : 'Request order cancellation'
+          "
+          [disabled]="loadingOrderDetails()"
+        >
+          <mat-icon>cancel</mat-icon>
+        </button>
+      }
+
       @if (orderView() === OrderView.BACKOFFICE_DETAILS) {
         <button matButton="filled" (click)="updateOrderStatus()" matTooltip="Update order status">
           {{ order.status }}
@@ -24,6 +40,10 @@
       }
     </div>
   </div>
+}
+
+@if (order.cancellationRequestedAt && order.status === OrderStatus.IN_PROGRESS) {
+  <app-info-box>A cancellation requested has been registered.</app-info-box>
 }
 
 <div class="order-details-container">
@@ -64,6 +84,14 @@
         @if (order.customerNote) {
           <dt>Customer note</dt>
           <dd>{{ order.customerNote }}</dd>
+        }
+        @if (order.cancellationRequestedAt) {
+          <dt>Cancellation requested</dt>
+          <dd>{{ order.cancellationRequestedAt | date: 'dd.MM.yyyy HH.mm.ss' }}</dd>
+        }
+        @if (order.cancellationReason) {
+          <dt>Cancellation reason</dt>
+          <dd>{{ order.cancellationReason }}</dd>
         }
       </dl>
     </section>

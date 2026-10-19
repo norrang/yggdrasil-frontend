@@ -25,6 +25,8 @@ import { OrderStatusModalData } from '../order-status-modal-data';
 import { OrderCommentForm } from '../order-comment-form/order-comment-form';
 import { MatDivider } from '@angular/material/list';
 import { RouterLink } from '@angular/router';
+import { OrderStatus } from '../order-status';
+import { InfoBox } from '../../info-box/info-box';
 
 @Component({
   imports: [
@@ -51,6 +53,7 @@ import { RouterLink } from '@angular/router';
     OrderCommentForm,
     MatDivider,
     RouterLink,
+    InfoBox,
   ],
   selector: 'app-order-details',
   styleUrl: './order-details.css',
@@ -79,4 +82,6 @@ export class OrderDetails {
       currentStatus: orderDetails.status,
     });
   }
+
+  protected readonly OrderStatus = OrderStatus;
 }
