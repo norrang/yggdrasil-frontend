@@ -10,6 +10,9 @@
       <mat-error>{{ subscriptionForm.email().errors()[0]?.message }}</mat-error>
     </mat-form-field>
     <mat-checkbox [formField]="subscriptionForm.newOrders">Notify me about new orders</mat-checkbox>
+    <mat-checkbox [formField]="subscriptionForm.cancellations"
+      >Notify me about cancellations</mat-checkbox
+    >
   </mat-dialog-content>
 
   <mat-dialog-actions>

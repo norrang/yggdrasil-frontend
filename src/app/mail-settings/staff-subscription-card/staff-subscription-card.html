@@ -16,6 +16,8 @@
         <dd>{{ details.email }}</dd>
         <dt>New orders</dt>
         <dd>{{ details.newOrders ? 'On' : 'Off' }}</dd>
+        <dt>Cancellations</dt>
+        <dd>{{ details.cancellations ? 'On' : 'Off' }}</dd>
       </dl>
       @if (!details.mailEnabled) {
         <app-info-box>

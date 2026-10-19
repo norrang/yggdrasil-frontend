@@ -3,4 +3,5 @@ export interface StaffSubscriptionResponse {
   email: string;
   newOrders: boolean;
   mailEnabled: boolean;
+  cancellations: boolean;
 }

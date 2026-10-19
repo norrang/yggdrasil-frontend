@@ -49,6 +49,7 @@ export class StaffSubscriptionModal {
   private readonly subscriptionModel = signal<StaffSubscriptionRequest>({
     email: this.data?.email ?? this.accountStore.email() ?? '',
     newOrders: this.data?.newOrders ?? true,
+    cancellations: this.data?.cancellations ?? true,
   });
 
   protected readonly subscriptionForm = form(
