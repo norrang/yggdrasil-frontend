@@ -17,6 +17,7 @@ import {
 import { MatIcon } from '@angular/material/icon';
 import { MatBadge } from '@angular/material/badge';
 import { Router } from '@angular/router';
+import { OrderStatus } from '../order-status';
 
 @Component({
   imports: [
@@ -48,6 +49,7 @@ export class OrderTable {
     'characterName',
     'dropOffLocation',
     'status',
+    'cancellation',
     'email',
     'comments',
   ];
@@ -57,4 +59,6 @@ export class OrderTable {
   openOrderDetails(id: string) {
     this.router.navigate(['backoffice/manage-orders/', id]);
   }
+
+  protected readonly OrderStatus = OrderStatus;
 }

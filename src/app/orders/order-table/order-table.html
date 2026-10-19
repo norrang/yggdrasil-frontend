@@ -31,6 +31,17 @@
     <td mat-cell *matCellDef="let element">{{ element.status }}</td>
   </ng-container>
 
+  <ng-container matColumnDef="cancellation">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element">
+      <div class="icon-container">
+        @if (element.cancellationRequestedAt && element.status === OrderStatus.IN_PROGRESS) {
+          <mat-icon>cancel</mat-icon>
+        }
+      </div>
+    </td>
+  </ng-container>
+
   <ng-container matColumnDef="email">
     <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let element">
