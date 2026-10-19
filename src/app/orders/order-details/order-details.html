@@ -26,6 +26,9 @@
             order.status === OrderStatus.PENDING ? 'Cancel order' : 'Request order cancellation'
           "
           [disabled]="loadingOrderDetails()"
+          (click)="
+            cancelOrder.emit({ orderNumber: order.orderNumber, currentStatus: order.status })
+          "
         >
           <mat-icon>cancel</mat-icon>
         </button>
@@ -43,7 +46,7 @@
 }
 
 @if (order.cancellationRequestedAt && order.status === OrderStatus.IN_PROGRESS) {
-  <app-info-box>A cancellation requested has been registered.</app-info-box>
+  <app-info-box>A cancellation request has been registered.</app-info-box>
 }
 
 <div class="order-details-container">

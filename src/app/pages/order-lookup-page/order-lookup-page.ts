@@ -7,6 +7,9 @@ import { JsonPipe } from '@angular/common';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatButton } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { CancelOrderModal } from '../../orders/cancel-order-modal/cancel-order-modal';
+import { CancelOrderModalData } from '../../orders/cancel-order-modal-data';
 
 @Component({
   imports: [OrderDetails, JsonPipe, MatProgressSpinner, MatButton, RouterLink],
@@ -24,6 +27,7 @@ export default class OrderLookupPage implements OnInit {
   protected orderDetailsError = signal<HttpErrorResponse | null>(null);
 
   private snackBar = inject(MatSnackBar);
+  private readonly dialog = inject(MatDialog);
 
   ngOnInit() {
     const orderNumber = this.orderNumber();
@@ -42,6 +46,11 @@ export default class OrderLookupPage implements OnInit {
         this.handleOrderLookupError(error);
       });
     }
+  }
+
+  cancelOrder(modalData: CancelOrderModalData) {
+    // The modal stores the updated order itself, so there is nothing to refresh afterwards
+    this.dialog.open(CancelOrderModal, { data: modalData });
   }
 
   private handleOrderLookupError(error: HttpErrorResponse) {

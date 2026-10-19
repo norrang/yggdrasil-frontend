@@ -4,6 +4,7 @@
       [orderDetails]="orderDetails"
       [loadingOrderDetails]="loadingOrderDetails()"
       (refreshOrderDetails)="refreshOrderDetails()"
+      (cancelOrder)="cancelOrder($event)"
     />
   } @else {
     @if (loadingOrderDetails()) {
